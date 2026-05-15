@@ -1,5 +1,4 @@
 <img src="hf-logo.png" width="200" alt="Company Logo">
-append company logo above
 
 # CRM Template Repository for Headline Filters 
 
