@@ -1,4 +1,4 @@
-<img src="hf-logo.jpg" width="200" alt="Company Logo">
+<img src="hf-logo.jpg" width="750" alt="Company Logo">
 
 # CRM Template Repository for Headline Filters 
 
