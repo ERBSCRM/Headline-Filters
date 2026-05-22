@@ -1,6 +1,6 @@
 USE [CRM]
 GO
-/****** Object:  Trigger [dbo].[tr_calculateVATQuoteDiscount]    Script Date: 15/05/2026 11:23:11 ******/
+/****** Object:  Trigger [dbo].[tr_calculateVATQuoteDiscount]    Script Date: 22/05/2026 16:17:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -78,7 +78,7 @@ set @totalminusdiscount=(@quit_quotedprice*@quit_quantity)-@Discounttotal
 	,quIt_c_vatsum=@Vatlineitemtotal,quit_c_totalincvat_cid=@currencyid
 	,quit_c_totalincvat=(@totalminusdiscount+@Vatlineitemtotal)
 	where quit_LineItemID=@quit_LineItemID and quit_deleted is null
-	
+
 End
 
 Else
@@ -114,7 +114,7 @@ if @quit_c_vatvalue >0
 
 else
 update QuoteItems set  quit_discountsum_CID=@currencyid,quit_discountsum=0,quIt_c_vatsum_CID=@currencyid,quIt_c_vatsum=0
-,quit_c_totalincvat_CID=@currencyid,quit_c_totalincvat=(@quit_quotedprice*@quit_quantity)
+,quit_c_totalincvat_CID=@currencyid,quit_c_totalincvat=(@quit_quotedprice*@quit_quantity) 
 	where quit_LineItemID=@quit_LineItemID and quit_deleted is null
 
 END
@@ -137,5 +137,10 @@ update quotes set quot_c_totalvat=@VATtotal, quot_c_totalincvat=@totalIncVAT
  where quot_orderQuoteId=@quit_orderQuoteId 
 and quot_Deleted is null
 
+update quoteitems set quit_q_warehouse = 5 
+where quit_q_warehouse is null
+and quit_LineItemID=@quit_LineItemID 
+and quit_deleted is null
+-- This will only work for Click Aylesford - Need to revist this if additional warehouses are to be used
 
 END
